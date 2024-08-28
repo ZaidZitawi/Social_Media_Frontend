@@ -1,0 +1,49 @@
+/* home.css */
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: #f8f9fa; /* Adjust as needed */
+}
+
+.main-content {
+  display: flex;
+  margin-top: 60px; /* Adjust according to the header height */
+  height: calc(100vh - 60px);
+}
+
+.sidebar {
+  position: fixed;
+  top: 60px; /* Adjust according to the header height */
+  left: 0;
+  width: 250px; /* Adjust width as needed */
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  background-color: #ffffff; /* Adjust as needed */
+}
+
+.main-area {
+  margin-left: 250px; /* Adjust according to the sidebar width */
+  margin-right: 250px; /* Adjust according to the friend suggestions width */
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.friend-suggestions {
+  position: fixed;
+  top: 60px; /* Adjust according to the header height */
+  right: 0;
+  width: 250px; /* Adjust width as needed */
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  background-color: #f1f1f1; /* Adjust as needed */
+}
