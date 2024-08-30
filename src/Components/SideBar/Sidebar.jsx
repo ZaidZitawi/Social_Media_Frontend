@@ -1,11 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaHome, FaGrinWink, FaCompass, FaUserFriends, FaUser, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaHome,
+  FaGrinWink,
+  FaCompass,
+  FaUserFriends,
+  FaUser,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import logo from "../../images/logoo.png";
-import "./sidebar.css"; 
+import "./sidebar.css";
+import "../../Styles/home.css";
 
 const Sidebar = () => {
   return (
+    // The main sidebar component with all content included inside the aside element
     <aside className="sidebar">
       {/* Logo and Website Name */}
       <div className="sidebar-header">

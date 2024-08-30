@@ -1,0 +1,182 @@
+.post {
+    border: 1px solid #ddd;
+    padding: 20px; /* Adjust padding for a tighter fit */
+    margin: 16px auto; /* Center the post */
+    border-radius: 8px;
+    background-color: #fff;
+    max-width: 600px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  }
+  
+  .user-post-data {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px; /* Consistent spacing */
+  }
+  
+  .profile-pic {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 12px;
+  }
+  
+  .media-display {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px; /* Consistent spacing */
+    overflow: hidden;
+    border-radius: 8px; /* Match border radius */
+  }
+  
+  .media-item {
+    overflow: hidden;
+    border-radius: 8px; /* Keep consistent with overall design */
+    max-height: 300px; /* Limit height */
+    max-width: 100%; /* Ensure responsive width */
+  }
+  
+  .post-media {
+    width: 100%;
+    max-height: 300px; /* Control the max height for better scaling */
+    border-radius: 8px;
+    object-fit: cover; /* Adjust media to fit within the bounds */
+    display: block;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px; /* Consistent spacing */
+    justify-content: flex-start;
+  }
+  
+  .action-buttons button {
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #333;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .action-buttons button:hover {
+    background-color: #e0e7ff;
+    color: #4f46e5;
+  }
+  
+  .comment-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  
+  .comment {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 16px;
+    background-color: #f0f2f5; /* Light background color */
+    border-radius: 12px; /* Rounded rectangle */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    flex-grow: 1; /* Allows the comment to take the available space */
+  }
+  
+  .comment-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px; /* Space between header and text */
+  }
+  
+  .comment-user-image {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .comment-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .comment-username {
+    font-weight: bold;
+    color: #1f2937; /* Darker color for emphasis */
+    margin-bottom: 2px;
+  }
+  
+  .comment-time {
+    color: #9ca3af;
+    font-size: 0.75rem;
+  }
+  
+  .comment-text {
+   
+    background: #ffffff; /* White background for the text */
+    border-radius: 12px; /* Same rounded corners */
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #374151; /* Darker text color */
+    margin-top: 4px; /* Space above text */
+  }
+  
+  .comment-love-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .heart-icon {
+    color: #6b7280; /* Neutral grey when not liked */
+    transition: color 0.3s;
+    font-size: 1.2rem; /* Adjust size for better appearance */
+  }
+  
+  .heart-icon.liked {
+    color: #e63946; /* Red color when liked */
+  }
+  
+  .add-comment {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid #ddd; /* Separate the input area visually */
+  }
+  
+  .add-comment-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    background: #f0f2f5; /* Light background for input field */
+  }
+  
+  .add-comment-btn {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    font-size: 0.875rem;
+  }
+  
+  .add-comment-btn:hover {
+    background-color: #4338ca;
+    transform: translateY(-1px);
+  }
+  

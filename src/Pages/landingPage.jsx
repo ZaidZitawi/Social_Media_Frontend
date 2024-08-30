@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Box, Typography, Container, CssBaseline } from "@mui/material";
-import Header from "../Components/landingHeader.jsx";
-import Footer from "../Components/footer.jsx";
-import SignIn from "../Components/SignIn.jsx"; // Ensure correct import paths
-import SignUp from "../Components/SignUp.jsx"; // Ensure correct import paths
+import Header from "../Components/Landing Page Components/landingHeader.jsx";
+import Footer from "../Components/Landing Page Components/footer.jsx";
+import SignIn from "../Components/Landing Page Components/SignIn.jsx"; 
+import SignUp from "../Components/Landing Page Components/SignUp.jsx"; 
 
 const LandingPage = () => {
   const [showSignUp, setShowSignUp] = useState(false);

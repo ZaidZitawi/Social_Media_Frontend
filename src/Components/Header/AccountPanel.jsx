@@ -7,6 +7,7 @@ import { MenuItem as BaseMenuItem, menuItemClasses } from '@mui/base/MenuItem';
 import { styled } from '@mui/system';
 import { CssTransition } from '@mui/base/Transitions';
 import { PopupContext } from '@mui/base/Unstable_Popup';
+import user from "../../images/image.png";
 
 // Replace the default MenuButton with a styled AvatarButton
 const AvatarButton = styled(BaseMenuButton)(
@@ -53,7 +54,7 @@ export default function MenuIntroduction() {
     <Dropdown>
       {/* Replace the default MenuButton with AvatarButton */}
       <AvatarButton>
-        <img src="/path/to/user-image.jpg" alt="User Profile" />
+        <img src={user} alt="User Profile" />
       </AvatarButton>
       <Menu slots={{ listbox: AnimatedListbox }}>
         <MenuItem onClick={createHandleMenuClick('Profile')}>Profile</MenuItem>

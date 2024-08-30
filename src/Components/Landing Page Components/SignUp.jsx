@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import SuccessDialog from './SuccessDialog'; // Import the SuccessDialog component
+import SuccessDialog from './SuccessDialog'; 
+import defaultImage from '../../images/image.png'; // Import the default image
 
 function Copyright(props) {
   return (
@@ -32,23 +33,32 @@ const theme = createTheme({
 export default function SignUp() {
   const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
 
+  // Convert the default image to a Blob
+  const createDefaultImageBlob = () => {
+    return fetch(defaultImage)
+      .then(response => response.blob())
+      .then(blob => new File([blob], 'default.png', { type: 'image/png' }));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const data = new FormData(form);
 
-    const user = {
-      name: data.get('username'),
-      email: data.get('email'),
-      password: data.get('password'),
-    };
+    // Add required fields to the FormData
+    data.append('name', data.get('name'));
+    data.append('email', data.get('email'));
+    data.append('password', data.get('password'));
+
+    // Add the default image to the FormData
+    const defaultImageBlob = await createDefaultImageBlob();
+    data.append('defaultImage', defaultImageBlob);
 
     try {
       const response = await fetch('http://localhost:8080/v0/auth/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
+        body: data,
+        // No need to set Content-Type header; browser will set it automatically for multipart/form-data
       });
 
       if (response.ok) {
@@ -88,7 +98,7 @@ export default function SignUp() {
                   fullWidth
                   id="username"
                   label="Username"
-                  name="username"
+                  name="name" // Ensure this name matches with what backend expects
                   autoComplete="username"
                   autoFocus
                 />
@@ -99,7 +109,7 @@ export default function SignUp() {
                   fullWidth
                   id="email"
                   label="Email Address"
-                  name="email"
+                  name="email" // Ensure this name matches with what backend expects
                   autoComplete="email"
                 />
               </Grid>
@@ -114,6 +124,7 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
+              {/* Removed the file input as it's not needed */}
             </Grid>
             <Button
               type="submit"
@@ -131,7 +142,3 @@ export default function SignUp() {
     </ThemeProvider>
   );
 }
-
-
-
-
