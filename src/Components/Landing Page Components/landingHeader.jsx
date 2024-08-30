@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AppBar, Toolbar, Typography, Box, Button, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
-import Logo from '../images/logoo.png';
+import Logo from '../../images/logoo.png';
 
 // Styled components for custom hover effects
 const CustomButton = styled(Button)({

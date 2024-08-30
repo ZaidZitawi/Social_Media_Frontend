@@ -1,12 +1,42 @@
-
+// MainArea.jsx
 import React, { useState } from 'react';
-import PostCreation from './postCreator.jsx'; 
+import PostCreation from './PostComponents/postCreator.jsx';
 import PostsList from './PostsList.jsx';
 
 const MainArea = () => {
   const [posts, setPosts] = useState([
-    { title: 'First Post', content: 'This is the content of the first post.' },
-    // Add more posts as needed
+    { 
+      title: 'First Post', 
+      content: 'This is the content of the first post.',
+      comments: [
+        { userImage: 'path/to/image.jpg', userName: 'John Doe', commentTime: '2h', text: 'Nice post!' },
+        // More comments
+      ]
+    },
+    { 
+      title: 'First Post', 
+      content: 'This is the content of the first post.',
+      comments: [
+        { userImage: 'path/to/image.jpg', userName: 'John Doe', commentTime: '2h', text: 'Nice post!' },
+        // More comments
+      ]
+    },
+    { 
+      title: 'First Post', 
+      content: 'This is the content of the first post.',
+      comments: [
+        { userImage: 'path/to/image.jpg', userName: 'John Doe', commentTime: '2h', text: 'Nice post!' },
+        // More comments
+      ]
+    },
+    { 
+      title: 'First Post', 
+      content: 'This is the content of the first post.',
+      comments: [
+        { userImage: 'path/to/image.jpg', userName: 'John Doe', commentTime: '2h', text: 'Nice post!' },
+        // More comments
+      ]
+    }
   ]);
 
   return (
