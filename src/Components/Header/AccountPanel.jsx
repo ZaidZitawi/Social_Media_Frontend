@@ -7,9 +7,9 @@ import { MenuItem as BaseMenuItem, menuItemClasses } from '@mui/base/MenuItem';
 import { styled } from '@mui/system';
 import { CssTransition } from '@mui/base/Transitions';
 import { PopupContext } from '@mui/base/Unstable_Popup';
-import user from "../../images/image.png";
+import { findUserByEmail } from '../../api/userApi.js';
+import { getProfileByUserId } from '../../api/profileApi.js';
 
-// Replace the default MenuButton with a styled AvatarButton
 const AvatarButton = styled(BaseMenuButton)(
   ({ theme }) => `
   font-family: 'IBM Plex Sans', sans-serif;
@@ -22,16 +22,16 @@ const AvatarButton = styled(BaseMenuButton)(
   width: 40px;
   height: 40px;
   cursor: pointer;
-  background-color: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+  background-color: #fff;
+  border: 1px solid #ccc;
   transition: border-color 150ms ease;
 
   &:hover {
-    border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
+    border-color: #999;
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 4px ${theme.palette.mode === 'dark' ? blue[300] : blue[200]};
+    box-shadow: 0 0 0 4px #cce0ff;
     outline: none;
   }
 
@@ -44,6 +44,64 @@ const AvatarButton = styled(BaseMenuButton)(
 );
 
 export default function MenuIntroduction() {
+  const [profileImage, setProfileImage] = React.useState(null);
+  const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchProfileImage = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('No token found');
+
+        // Decode email and user ID from token
+        let email = localStorage.getItem('email');
+        let userId = localStorage.getItem('userId');
+        let storedProfileImage = localStorage.getItem('profileImage');
+        let name = localStorage.getItem('name');
+
+        console.log('Stored Email:', email);
+        console.log('Stored UserId:', userId);
+        console.log('Stored Profile Image:', storedProfileImage);
+        console.log('Stored Name:', name);
+
+        if (!email || !userId || !storedProfileImage || !name) {
+          email = decodeTokenEmail(token);
+          if (!email) throw new Error('Invalid token, email not found');
+
+          const userResponse = await findUserByEmail(email, token);
+          userId = userResponse.data.userId;
+          name = userResponse.data.name;
+          console.log('User response:', userResponse);
+
+          const profileResponse = await getProfileByUserId(userId);
+          console.log('Profile response:', profileResponse);
+          const imageName = profileResponse.data.profilePictureUrl;
+          const imageUrl = `/uploads/${imageName}`;
+          
+          // Set the profile image URL
+          setProfileImage(imageUrl);
+
+          // Store email, userId, and profileImage in local storage
+          localStorage.setItem('email', email);
+          localStorage.setItem('userId', userId);
+          localStorage.setItem('profileImage', imageUrl);
+          localStorage.setItem('name', name);
+        } else {
+          // If profileImage is available in local storage, use it
+          setProfileImage(storedProfileImage);
+        }
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchProfileImage();
+  }, []);
+
+  React.useEffect(() => {
+    console.log('Profile image updated:', profileImage);
+  }, [profileImage]);
+
   const createHandleMenuClick = (menuItem) => {
     return () => {
       console.log(`Clicked on ${menuItem}`);
@@ -52,9 +110,12 @@ export default function MenuIntroduction() {
 
   return (
     <Dropdown>
-      {/* Replace the default MenuButton with AvatarButton */}
       <AvatarButton>
-        <img src={user} alt="User Profile" />
+        {profileImage ? (
+          <img src={profileImage} alt="User Profile" />
+        ) : (
+          <img src="/uploads/default-profile.png" alt="Default User Profile" />
+        )}
       </AvatarButton>
       <Menu slots={{ listbox: AnimatedListbox }}>
         <MenuItem onClick={createHandleMenuClick('Profile')}>Profile</MenuItem>
@@ -67,31 +128,34 @@ export default function MenuIntroduction() {
   );
 }
 
-// The rest of your code remains the same
-const blue = {
-  50: '#F0F7FF',
-  100: '#C2E0FF',
-  200: '#99CCF3',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E6',
-  700: '#0059B3',
-  800: '#004C99',
-  900: '#003A75',
-};
+// Extract email from token
+const decodeTokenEmail = (token) => {
+  if (!token) {
+    console.error('No token provided');
+    return null;
+  }
 
-const grey = {
-  50: '#F3F6F9',
-  100: '#E5EAF2',
-  200: '#DAE2ED',
-  300: '#C7D0DD',
-  400: '#B0B8C4',
-  500: '#9DA8B7',
-  600: '#6B7A90',
-  700: '#434D5B',
-  800: '#303740',
-  900: '#1C2025',
+  try {
+    // Split the token into its parts
+    const [header, payload] = token.split('.');
+    console.log('Header:', header);
+    console.log('Payload:', payload);
+
+    // Decode the base64 URL encoded payload
+    const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+    const decodedPayload = atob(base64);
+    console.log('Decoded Payload:', decodedPayload);
+
+    // Parse JSON
+    const parsedPayload = JSON.parse(decodedPayload);
+    console.log('Parsed Payload:', parsedPayload);
+
+    // Extract email from the 'sub' field
+    return parsedPayload.sub || null;
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return null;
+  }
 };
 
 const Listbox = styled('ul')(
@@ -105,10 +169,10 @@ const Listbox = styled('ul')(
   border-radius: 12px;
   overflow: auto;
   outline: 0px;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  box-shadow: 0px 4px 30px ${theme.palette.mode === 'dark' ? grey[900] : grey[200]};
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #000;
+  box-shadow: 0px 4px 30px #ccc;
   z-index: 1;
 
   .closed & {
@@ -173,13 +237,13 @@ const MenuItem = styled(BaseMenuItem)(
   }
 
   &:focus {
-    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
-    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
-    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+    outline: 3px solid #cce0ff;
+    background-color: #f0f7ff;
+    color: #000;
   }
 
   &.${menuItemClasses.disabled} {
-    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+    color: #999;
   }
   `,
 );
