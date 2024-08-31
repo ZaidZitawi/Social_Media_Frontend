@@ -257,7 +257,6 @@ const PostForm = () => {
 
         try {
             const token = localStorage.getItem('token');
-
             if (isLiked) {
                 await axios.delete(`http://localhost:8080/api/unlikeComment/${commentId}`, {
                     headers: {
@@ -288,6 +287,7 @@ const PostForm = () => {
                     return updatedPosts;
                 });
             } else {
+                const token = localStorage.getItem('token');
                 await axios.post(`http://localhost:8080/api/LikeComment/${commentId}`, null, {
                     headers: {
                         'Authorization': `Bearer ${token}`,

@@ -1,95 +1,40 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import coverPhoto from '../images/cover_photo.jpg';
-import profilePicture from '../images/profile_picture.jpg';
-import '../Styles/Profile.css';
+// src/Components/Profile.js
+import React, { useState, useEffect } from 'react';
 import ProfileHeader from './ProfileHeader';
 import UserInfo from './UserInfo';
-import PersonalInfo from './PersonalInfo';
-import PostsSection from './PostsSection';
-import axios from 'axios';
+import PostForm from './PostForm'; // Import PostForm
+import '../Styles/Profile.css';
 
 const Profile = () => {
-    const navigate = useNavigate();
-    const [coverPhotoSrc, setCoverPhotoSrc] = useState(coverPhoto);
-    const [profilePicSrc, setProfilePicSrc] = useState(profilePicture);
-    const [isEditing, setIsEditing] = useState(false);
-    const [personalInfo, setPersonalInfo] = useState({
-        name: 'Zaid Zitawi',
-        education: 'University Name',
-        work: 'Company Name',
-        dob: 'January 1, 1990'
-    });
+    const [userId, setUserId] = useState(null);
 
-    const handleEditProfile = () => {
-        navigate('/edit-profile');
-    };
+    useEffect(() => {
+        const storedUserId = localStorage.getItem('userId');
+        setUserId(storedUserId);
+    }, []);
 
-    const toggleEdit = () => {
-        setIsEditing(!isEditing);
-    };
-
-    const handleChange = (e) => {
-        setPersonalInfo({
-            ...personalInfo,
-            [e.target.name]: e.target.value
-        });
-    };
-
-    const handleSave = () => {
-        // Save updated personal info
-        setIsEditing(false);
-    };
-
-    const handleFileChange = async (event, type) => {
-        const file = event.target.files[0];
-        if (file) {
-            const formData = new FormData();
-            formData.append('file', file);
-
-            try {
-                if (type === 'cover') {
-                    const response = await axios.post(`/api/profile/1/upload-cover-picture`, formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    });
-                    setCoverPhotoSrc(`path/to/upload/directory/${response.data.coverPictureUrl}`);
-                } else if (type === 'profile') {
-                    const response = await axios.post(`/api/profile/1/upload-profile-picture`, formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    });
-                    setProfilePicSrc(`path/to/upload/directory/${response.data.profilePictureUrl}`);
-                }
-            } catch (error) {
-                console.error('Error uploading file:', error);
-            }
-        }
-    };
+    if (!userId) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="profile-container">
-            <ProfileHeader 
-                coverPhotoSrc={coverPhotoSrc} 
-                profilePicSrc={profilePicSrc} 
-                onCoverPhotoChange={(e) => handleFileChange(e, 'cover')} 
-                onProfilePicChange={(e) => handleFileChange(e, 'profile')} 
-            />
+            <ProfileHeader userId={userId} />
             <div className="profile-content">
                 <div className="profile-main">
-                    <UserInfo name={personalInfo.name} onEditProfile={handleEditProfile} />
-                    <PostsSection />
-                </div>
-                <div className="profile-sidebar">
-                    <PersonalInfo 
-                        personalInfo={personalInfo} 
-                        isEditing={isEditing} 
-                        onChange={handleChange} 
-                        onSave={handleSave} 
-                        onEdit={toggleEdit} 
-                    />
+                    <UserInfo userId={userId} />
+                    <div className="main-content">
+                        <nav className="profile-nav">
+                            <ul>
+                                <li>Posts</li>
+                                <li>Friends</li>
+                                <li>Photos</li>
+                            </ul>
+                        </nav>
+                        <div className="posts-section">
+                            <PostForm userId={userId} /> {/* Add the PostForm component here */}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

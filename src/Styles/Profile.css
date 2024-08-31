@@ -1,0 +1,321 @@
+/* Container for the entire profile page */
+.profile-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.profile-header {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Adjust height as needed */
+    background-color: #f0f0f0;
+    border-bottom: 8px solid #007bff; /* Border to separate cover photo from profile picture */
+    overflow: hidden;
+}
+
+.cover-photo-container {
+    width: 100%;
+    height: 100%; /* Adjust to control cover photo height */
+    position: relative;
+}
+
+.cover-photo-container img {
+    width: 100%;
+    height: 130%;
+    object-fit: cover; /* Ensures the cover photo covers the area */
+}
+
+.profile-picture {
+    position: absolute;
+    bottom: 10px; /* Adjust positioning as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.edit-cover-icon,
+.edit-profile-picture-icon {
+    font-size: 24px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.edit-cover-icon {
+    top: 10px;
+    right: 10px;
+}
+
+.edit-profile-picture-icon {
+    bottom: 10px;
+    right: 10px;
+}
+
+.edit-cover-icon:hover,
+.edit-profile-picture-icon:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+/* Content layout for profile section */
+.profile-content {
+    display: flex;
+    margin-top: 20px;
+}
+
+.profile-main {
+    flex: 2;
+    margin-right: 20px;
+}
+
+.profile-sidebar {
+    flex: 1;
+}
+
+/* Navigation for profile section */
+.profile-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin-top: 30px;
+    border-bottom: 2px solid #007bff;
+    padding: 0;
+}
+
+.profile-nav ul li {
+    margin: 0 30px;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.profile-nav ul li:hover {
+    background-color: #f0f0f0;
+    color: #007bff;
+    border-radius: 5px;
+}
+
+/* Additional info section with shadow effect */
+.additional-info {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    text-align: left;
+}
+
+/* Header for additional info section */
+.additional-info h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+/* Paragraphs within additional info section */
+.additional-info p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Input fields within additional info section */
+.additional-info input {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Save and edit buttons with shadow effect */
+.save-button,
+.edit-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: background-color 0.3s, transform 0.3s;
+    margin-left: 65px;
+}
+
+/* Save and edit buttons hover effect */
+.save-button:hover,
+.edit-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Container for user info directly under the profile picture with shadow effect */
+.user-info {
+    text-align: center; /* Centers the text */
+    margin-top: 90px; 
+    margin-left: 380px;
+    background-color: #f2f5f7;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    padding: 20px;
+    margin-right: 250px;
+
+}
+
+/* Header for user info section */
+.user-info h1 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Action buttons with shadow effect */
+.action-buttons button {
+    margin-top: 10px;
+    padding: 8px 100px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+
+}
+
+.action-buttons button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Main content container with shadow effect */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the content horizontally */
+    margin-top: 40px; /* Space between user info and posts section */
+    margin-left: 320px; /* Space between user info and posts section */
+    background-color: #ffffff; /* White background for shadow effect */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 80px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    width: 60%; /* Adjust the width to make the box wider */
+}
+/* UserInfo.css */
+
+.user-info {
+    text-align: center; /* Centers the text */
+    margin-top: 20px;
+    background-color: #f2f5f7;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    padding: 20px;
+}
+
+/* Edit form styling */
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-form label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.edit-form input,
+.edit-form textarea {
+    margin-top: 5px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.edit-form textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.action-buttons {
+    margin-top: 20px;
+}
+
+.save-button,
+.cancel-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.save-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.cancel-button {
+    background-color: #ccc;
+    color: black;
+    margin-left: 10px;
+}
+
+.save-button:hover,
+.cancel-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.cancel-button:hover {
+    background-color: #999;
+}
+
+
+
+.user-info .save-button {
+    background-color: #4caf50; /* Green */
+}
+
+
+.user-info .name,
+.user-info .bio {
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+.user-info .email {
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.pp
+{
+    background-color: #0099ff;
+    font-style: italic; /* Italicize the email */
+
+}

@@ -44,6 +44,7 @@ export default function SignIn() {
       });
 
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userId', response.data.userId);
       window.location.href = '/home'; // Redirect to home page on successful login
     } catch (error) {
       console.error('Error during sign-in:', error);

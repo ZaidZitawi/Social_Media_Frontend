@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import SuccessDialog from './SuccessDialog'; 
+import SuccessDialog from './SuccessDialog';
 import defaultImage from '../../images/image.png'; // Import the default image
 
 function Copyright(props) {
@@ -42,13 +42,9 @@ export default function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
 
-    // Add required fields to the FormData
-    data.append('name', data.get('name'));
-    data.append('email', data.get('email'));
-    data.append('password', data.get('password'));
+    // Use FormData directly with the input names to avoid any confusion or duplication
+    const data = new FormData(event.target); // 'event.target' automatically gets the form element and its fields
 
     // Add the default image to the FormData
     const defaultImageBlob = await createDefaultImageBlob();
@@ -58,14 +54,14 @@ export default function SignUp() {
       const response = await fetch('http://localhost:8080/v0/auth/register', {
         method: 'POST',
         body: data,
-        // No need to set Content-Type header; browser will set it automatically for multipart/form-data
+        // The browser will set the appropriate headers for multipart/form-data automatically
       });
 
       if (response.ok) {
         setOpenSuccessDialog(true); // Show success dialog on successful registration
       } else {
         const errorResponse = await response.text();
-        alert(`Registration failed: ${errorResponse}`);
+        alert('Registration failed: ${errorResponse}');
       }
     } catch (error) {
       alert('Registration failed: An unexpected error occurred.');
@@ -124,7 +120,6 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              {/* Removed the file input as it's not needed */}
             </Grid>
             <Button
               type="submit"
