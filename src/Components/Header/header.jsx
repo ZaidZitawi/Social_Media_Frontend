@@ -12,7 +12,7 @@ import AccountPanel from './AccountPanel';
 import { Link } from 'react-router-dom'; // If you're using React Router
 import './header.css'; // Import the CSS file
 
-function Header({ mode, toggleColorMode }) {
+function Header() {
   return (
     <div>
       <AppBar
@@ -23,9 +23,8 @@ function Header({ mode, toggleColorMode }) {
         <Container maxWidth="lg">
           <Toolbar
             variant="regular"
-            className={`header-toolbar ${mode === 'dark' ? 'header-toolbar-dark' : ''}`}
+            className="header-toolbar"
           >
-            {/* Left Section - Logo and Links */}
             <Box
               sx={{
                 flexGrow: 1,
@@ -75,9 +74,6 @@ function Header({ mode, toggleColorMode }) {
   );
 }
 
-Header.propTypes = {
-  mode: PropTypes.oneOf(['dark', 'light']).isRequired,
-  toggleColorMode: PropTypes.func.isRequired,
-};
+
 
 export default Header;
