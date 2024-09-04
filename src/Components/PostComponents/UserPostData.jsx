@@ -1,36 +1,46 @@
 import React from 'react';
-import './UserProfile.css'; // Import the CSS file
-import logo from '../../images/logoo.png';
+import './post.css';
 
-export default function UserProfile() {
+// Helper function to format time
+const timeAgo = (timestamp) => {
+  const now = new Date();
+  const postDate = new Date(timestamp);
+  const seconds = Math.floor((now - postDate) / 1000);
+
+  let interval = Math.floor(seconds / 31536000); // Years
+  if (interval > 1) return `${interval}y ago`;
+
+  interval = Math.floor(seconds / 2592000); // Months
+  if (interval > 1) return `${interval}mo ago`;
+
+  interval = Math.floor(seconds / 86400); // Days
+  if (interval > 1) return `${interval}d ago`;
+
+  interval = Math.floor(seconds / 3600); // Hours
+  if (interval > 1) return `${interval}h ago`;
+
+  interval = Math.floor(seconds / 60); // Minutes
+  if (interval > 1) return `${interval}m ago`;
+
+  return `${Math.floor(seconds)}s ago`; // Seconds
+};
+
+const UserPostData = ({ profilePic, username, date }) => {
+  // Directly construct the URL for local images
+  const imageUrl = `/uploads/${profilePic}`;
+
+  // Format the date
+  const formattedDate = timeAgo(date);
+
   return (
-    <div className="user-profile">
-      {/* Settings Button */}
-      <div className="settings-button">
-        <button className="settings-btn">
-          <svg className="settings-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 12h12M6 6h12M6 18h12" />
-          </svg>
-        </button>
-        <div className="settings-menu">
-          <button className="menu-item">Edit Post</button>
-          <button className="menu-item">Delete Post</button>
-        </div>
-      </div>
-
-      {/* Profile Picture, Name, and Follow Button */}
-      <div className="profile-content">
-        <img className="profile-pic" src={logo}/>
-        <div className="profile-details">
-          <div className="profile-header">
-            <div className="profile-text">
-              <p className="profile-name">Jen Smith</p>
-            </div>
-            <button className="follow-btn">Followed</button>
-          </div>
-          <p className="post-time">Posted on 17:30, June 12, 2022</p>
-        </div>
+    <div className="user-post-data">
+      <img className="profile-pic" src={imageUrl} alt={`${username}'s profile`} />
+      <div className="user-info">
+        <h4>{username}</h4>
+        <p>{formattedDate}</p>
       </div>
     </div>
   );
-}
+};
+
+export default UserPostData;

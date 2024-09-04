@@ -1,18 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserPlus } from "react-icons/fa";
-import "../../Styles/home.css";
+import axios from "axios";
+import './FriendCard.css';
 import FriendCard from "./FriendCard"; 
 
 const FriendSuggestions = () => {
-  // Static data to replace API response
-  const [users] = useState([
-    { id: 1, name: "John Doe", profileImage: "/path/to/image1.jpg" },
-    { id: 2, name: "Jane Smith", profileImage: "/path/to/image2.jpg" },
-    // Add more static users as needed
-  ]);
-
+  const [users, setUsers] = useState([]);
   const [following, setFollowing] = useState({});
+
+  // Fetch user data from the API
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get("http://localhost:8080/v0/user/suggestions", {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching friend suggestions:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const handleFollow = (userId) => {
     console.log("Follow user with ID:", userId);
@@ -41,11 +55,15 @@ const FriendSuggestions = () => {
       ) : (
         users.map((user) => (
           <FriendCard
-            key={user.id}
-            user={user}
+            key={user.userId}
+            user={{
+              id: user.userId,
+              name: user.name,
+              profileImage: user.profile ? `/uploads/${user.profile.profilePictureUrl}` : "/path/to/default-image.jpg"
+            }}
             onFollow={handleFollow}
             onUnfollow={handleUnfollow}
-            isFollowing={following[user.id]}
+            isFollowing={following[user.userId]}
           />
         ))
       )}

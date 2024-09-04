@@ -103,7 +103,8 @@ export default function MenuIntroduction() {
   }, [profileImage]);
 
   const createHandleMenuClick = (menuItem) => {
-    return () => {
+    return (event) => {
+      event.preventDefault();
       console.log(`Clicked on ${menuItem}`);
     };
   };
@@ -119,8 +120,8 @@ export default function MenuIntroduction() {
       </AvatarButton>
       <Menu slots={{ listbox: AnimatedListbox }}>
         <MenuItem onClick={createHandleMenuClick('Profile')}>Profile</MenuItem>
-        <MenuItem onClick={createHandleMenuClick('Language settings')}>
-          Language settings
+        <MenuItem onClick={createHandleMenuClick('settings')}>
+          settings
         </MenuItem>
         <MenuItem onClick={createHandleMenuClick('Log out')}>Log out</MenuItem>
       </Menu>

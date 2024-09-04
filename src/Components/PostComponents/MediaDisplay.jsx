@@ -1,4 +1,3 @@
-
 import React from 'react';
 import './post.css';
 
@@ -11,13 +10,19 @@ const MediaDisplay = ({ media }) => {
     <div className="media-display">
       {media.map((item, index) => (
         <div key={index} className="media-item">
-          {item.type === 'image' ? (
-            <img src={item.url} alt={`media-${index}`} className="post-media" />
-          ) : (
+          {item.mediaUrl.endsWith('.jpg') || item.mediaUrl.endsWith('.png') || item.mediaUrl.endsWith('.jpeg') ? (
+            <img
+              src={`/uploads/${item.mediaUrl}`} // Add the /uploads/ prefix
+              alt={`media-${index}`}
+              className="post-media"
+            />
+          ) : item.mediaUrl.endsWith('.mp4') ? (
             <video controls className="post-media">
-              <source src={item.url} type="video/mp4" />
+              <source src={`/uploads/${item.mediaUrl}`} type="video/mp4" /> {/* Add the /uploads/ prefix */}
               Your browser does not support the video tag.
             </video>
+          ) : (
+            <p>Unsupported media type</p> // Handle unsupported media types
           )}
         </div>
       ))}

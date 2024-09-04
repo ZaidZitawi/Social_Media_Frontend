@@ -13,7 +13,6 @@ import LandingPage from "./Pages/landingPage.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <StrictMode>
     <Router>
      
       <Routes>
@@ -28,7 +27,6 @@ root.render(
         
       </Routes>
     </Router>
-  </StrictMode>
 );
 
 reportWebVitals();

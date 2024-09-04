@@ -11,6 +11,7 @@
   box-shadow: none !important;
   background-image: none; 
   margin-top: 15px;
+  z-index: 10; 
 }
 
 /* Toolbar Style */
@@ -23,8 +24,9 @@
   backdrop-filter: blur(24px);
   max-height: 40px;
   border: 1px solid;
-  border-color: #ddd; /* Divider color */
-  background-color: transparent !important; /* Ensure it's transparent */
+  border-color: #ddd; 
+  background-color: transparent !important; 
+  position: relative;
 }
 
 
@@ -55,7 +57,7 @@
     padding-left: 8px;
     padding-right: 4px;
     max-width: 250px;
-    border: 1px solid #1E8EAB; /* Border color matching the hover color */
+    border: 1px solid #1E8EAB; 
     margin-right: 30px;
   }
   
