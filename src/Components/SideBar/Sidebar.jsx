@@ -25,7 +25,7 @@ const Sidebar = () => {
       <nav>
         <ul className="sidebar-list">
           <li className="sidebar-item">
-            <Link to="/" className="sidebar-link">
+            <Link to="/home" className="sidebar-link">
               <FaHome className="sidebar-icon" />
               Home
             </Link>
@@ -53,7 +53,7 @@ const Sidebar = () => {
         <div className="sidebar-divider">
           <ul className="sidebar-list">
             <li className="sidebar-item">
-              <Link to="/profile" className="sidebar-link">
+              <Link to="/Profile" className="sidebar-link">
                 <FaUser className="sidebar-icon" />
                 Profile
               </Link>

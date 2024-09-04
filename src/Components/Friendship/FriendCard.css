@@ -12,7 +12,6 @@
   border: 1px solid #1E8EAB;
   transition: box-shadow 0.3s ease;
   overflow:hidden;
-  overflow-y: auto;
 }
 
 .friend-suggestions-container:hover {
