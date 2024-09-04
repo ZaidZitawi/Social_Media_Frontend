@@ -1,18 +1,17 @@
-/* Basic styles for sidebar */
+/* Sidebar Styles */
 .sidebar {
-  width: 220px;
+  width: 250px;
   min-width: 60px;
-  background-color: #f2f5f7;
+  background-color: #f9fbfd; /* Updated to match the theme */
   position: fixed;
-  left: 0;
-  top: 55%; /* Center vertically */
-  transform: translateY(-50%); /* Adjust the position to truly center */
-  padding: 20px 10px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
-  transition: width 0.3s;
+  left: 20px; /* Adjust left positioning to align well with content */
+  top: 100px; /* Align with other fixed components */
+  padding: 20px 15px;
+  border-radius: 12px;
+  border: 1px solid #1E8EAB;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s, box-shadow 0.3s;
   z-index: 1000; /* Ensure it's above other content */
-  margin-left: 25px;
-  border-radius: 15px;
 }
 
 .sidebar.collapsed {
@@ -49,12 +48,14 @@
   width: 40px;
   height: 40px;
   margin-right: 10px;
+  border-radius: 50%;
+  border: 2px solid #004696;
 }
 
 .sidebar-title {
   font-size: 1.2rem;
   color: #004696;
-  display: none; /* Hide on collapse */
+  font-weight: bold;
 }
 
 .sidebar.collapsed .sidebar-title {
@@ -76,14 +77,15 @@
   align-items: center;
   text-decoration: none;
   color: #004696;
-  padding: 8px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .sidebar-link:hover {
   background-color: #e0e7ed;
   color: #1e8eab;
+  transform: scale(1.05);
 }
 
 .sidebar-icon {

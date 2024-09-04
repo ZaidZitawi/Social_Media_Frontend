@@ -3,22 +3,44 @@
     padding: 20px; /* Adjust padding for a tighter fit */
     margin: 16px auto; /* Center the post */
     border-radius: 8px;
-    background-color: #fff;
+    border: 1px solid #1E8EAB; 
     max-width: 600px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.1); /* Light shadow for depth */
   }
   
   .user-post-data {
     display: flex;
     align-items: center;
-    margin-bottom: 12px; /* Consistent spacing */
+    margin-bottom: 12px; 
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.18);
+    border-radius: 10px;
+    height: 80px;
+    
   }
   
   .profile-pic {
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    margin-right: 12px;
+    margin-left: 12px;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+  
+  .user-info h4 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .user-info p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+    color: #666;
   }
   
   .media-display {
@@ -75,6 +97,7 @@
     gap: 8px;
     margin-bottom: 16px;
     position: relative;
+    
   }
   
   .comment {
@@ -179,4 +202,77 @@
     background-color: #4338ca;
     transform: translateY(-1px);
   }
+  
+  
+  .see-all-comments-btn {
+    background: none;
+    border: none;
+    color: #1e8eab;
+    cursor: pointer;
+    padding: 8px 0;
+    font-size: 0.875rem;
+  }
+  
+  .comments-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .comments-dialog-content {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .close-dialog-btn {
+    background: none;
+    border: none;
+    color: #e63946;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-align: right;
+  }
+  
+  .comments-dialog-list {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .likes-count {
+    font-size: 1rem; 
+    color: #4f46e5; 
+    font-weight: 700;
+    margin-top: 3px; 
+    padding: 6px 12px; 
+    border-radius: 12px;
+    background-color: #f3f4f6; 
+    display: inline-flex; 
+    align-items: center; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .likes-count:hover {
+    background-color: #e0e7ff; 
+    color: #3b82f6; 
+    cursor: pointer; 
+  }
+  
+  .likes-count:active {
+    background-color: #c7d2fe; /* Even darker background when clicked */
+  }
+  
   

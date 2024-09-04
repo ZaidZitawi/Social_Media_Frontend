@@ -168,14 +168,14 @@
 
 
 /* Header for user info section */
-.user-info h1 {
+.user-info2 h1 {
     margin: 10px 0;
     font-size: 24px;
     color: #360000;
 }
 
 /* Action buttons with shadow effect */
-.action-buttons button {
+.action-buttons2 button {
     margin-top: 10px;
     padding: 8px 100px;
     background-color: #007bff;
@@ -185,17 +185,17 @@
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
-    margin-left: 200px;
+    margin-left: 20px;
 
 }
 
-.action-buttons button:hover {
+.action-buttons2 button:hover {
     background-color: #6ca0d8;
     transform: translateY(-2px);
 }
 
 /* Main content container with shadow effect */
-.main-content {
+.main-content2 {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centers the content horizontally */
@@ -206,7 +206,7 @@
 }
 /* UserInfo.css */
 
-.user-info {
+.user-info2 {
     text-align: center; /* Centers the text */
     margin-top: 20px;
     background-color: #f2f5f7;
@@ -245,7 +245,7 @@
     resize: vertical;
 }
 
-.action-buttons {
+.action-buttons2 {
     margin-top: 20px;
 }
 
@@ -283,19 +283,19 @@
 
 
 
-.user-info .save-button {
+.user-info2 .save-button {
     background-color: #4caf50; /* Green */
 }
 
 
-.user-info .name,
-.user-info .bio {
+.user-info2 .name,
+.user-info2 .bio {
     font-size: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
 }
 
-.user-info .email {
+.user-info2 .email {
     font-size: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

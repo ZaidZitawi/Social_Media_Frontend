@@ -1,20 +1,55 @@
-import React, { useState } from 'react';
-import { FaImage, FaVideo } from 'react-icons/fa';
-import './PostCreator.css'; // Ensure this CSS file exists
-import user from '../../images/image.png'; 
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { FaImage, FaVideo, FaTimes } from 'react-icons/fa';
+import './PostCreator.css';
 
-const PostCreator = () => {
+const PostCreator = ({ onPostCreated }) => {
   const [postContent, setPostContent] = useState('');
   const [media, setMedia] = useState(null);
   const [mediaPreview, setMediaPreview] = useState('');
+  const [profileImage, setProfileImage] = useState('/images/default-profile.png');
+  const [name, setName] = useState('');
 
-  const handlePostSubmit = (e) => {
+  useEffect(() => {
+    const storedProfileImage = localStorage.getItem('profileImage');
+    const storedName = localStorage.getItem('name');
+    if (storedProfileImage) {
+      setProfileImage(storedProfileImage);
+    }
+    if (storedName) {
+      setName(storedName);
+    }
+  }, []);
+
+  const handlePostSubmit = async (e) => {
     e.preventDefault();
-    // Logic to handle post creation
-    console.log("Post submitted:", postContent, media);
-    setPostContent('');
-    setMedia(null);
-    setMediaPreview('');
+
+    const formData = new FormData();
+    formData.append('content', postContent);
+
+    if (media) {
+      formData.append('files', media);
+    }
+
+    try {
+      await axios.post('http://localhost:8080/v0/post/AddPost', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      // Call onPostCreated to refresh the posts list
+      if (onPostCreated) {
+        onPostCreated();
+      }
+      
+      setPostContent('');
+      setMedia(null);
+      setMediaPreview('');
+    } catch (error) {
+      console.error('Error creating post:', error);
+    }
   };
 
   const handleMediaChange = (e) => {
@@ -26,14 +61,18 @@ const PostCreator = () => {
     }
   };
 
+  const handleMediaRemove = () => {
+    setMedia(null);
+    setMediaPreview('');
+  };
+
   return (
     <div className="post-creator">
       <div className="post-creator-header">
-        <img
-          src={user}
-          alt="User profile"
-          className="post-creator-profile-image"
-        />
+        <img src={profileImage} alt="User profile" className="post-creator-profile-image" />
+        <div className="post-creator-user-info">
+          <span className="post-creator-username">{name}</span>
+        </div>
       </div>
       <form onSubmit={handlePostSubmit} className="post-creator-form">
         <textarea
@@ -45,6 +84,13 @@ const PostCreator = () => {
         />
         {mediaPreview && (
           <div className="post-creator-media-preview">
+            <button
+              type="button"
+              className="post-creator-media-remove-button"
+              onClick={handleMediaRemove}
+            >
+              <FaTimes />
+            </button>
             {media.type.startsWith('image/') ? (
               <img src={mediaPreview} alt="Media preview" className="post-creator-media-image" />
             ) : (

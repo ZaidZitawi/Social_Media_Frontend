@@ -12,14 +12,13 @@ import LandingPage from "./Pages/landingPage.jsx";
 import Profile from "./Components/Profile.jsx";
 import Logout from "./Components/Landing Page Components/Logout.jsx";
 import About from "./Components/Header/About.jsx";
-import StartingPoint from "./Components/StartingPoint.jsx";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <StrictMode>
     <Router>
       <Routes>
-      <Route path="/start" element={<StartingPoint />} />
+      
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/addPost" element={<PostForm />} />
@@ -34,7 +33,6 @@ root.render(
         <Route path="/about" element={<About />} />
       </Routes>
     </Router>
-  </StrictMode>
 );
 
 reportWebVitals();

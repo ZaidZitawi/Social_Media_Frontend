@@ -1,16 +1,13 @@
-// PostsList.jsx
 import React from 'react';
-import Post from './PostComponents/Post.jsx'; // Import the Post component
+import Post from './PostComponents/Post.jsx';
 
 const PostsList = ({ posts }) => {
   return (
     <div className="posts-list">
-      {posts.map((post, index) => (
+      {posts.map((post) => (
         <Post 
-          key={index}
-          title={post.title}
-          content={post.content}
-          comments={post.comments} // Assuming posts have comments data; adjust as needed
+          key={post.postId} // Use postId as key
+          post={post} // Pass the entire post object
         />
       ))}
     </div>

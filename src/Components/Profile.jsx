@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // Import useParams to get URL parameters
 import ProfileHeader from './ProfileHeader';
 import UserInfo from './UserInfo';
-import PostForm from './PostForm';
 import Header from './Header/header';
 import Sidebar from './SideBar/Sidebar';
 import FriendSuggestions from './Friendship/FriendSuggestions';
 import '../Styles/Profile.css';
+import MainArea from './MainArea';
 
 const Profile = () => {
     const { userId: routeUserId } = useParams(); // Get userId from URL params if available
@@ -43,7 +43,7 @@ const Profile = () => {
                 <div className="profile-content">
                     <div className="profile-main">
                         <UserInfo userId={userId} currentUserId={currentUserId} />
-                        <div className="main-content">
+                        <div className="main-content2">
                             <nav className="profile-nav">
                                 <ul>
                                     <li>Posts</li>
@@ -55,7 +55,7 @@ const Profile = () => {
                                 </ul>
                             </nav>
                             <div className="posts-section">
-                                <PostForm userId={userId} />
+                                <MainArea />
                             </div>
                         </div>
                     </div>

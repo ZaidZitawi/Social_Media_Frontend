@@ -86,7 +86,7 @@ const UserInfo = ({ userId, currentUserId }) => {
     };
 
     return (
-        <div className="user-info">
+        <div className="user-info2">
             <h1 className="pp">Personal Information</h1>
             {isEditing ? (
                 <div className="edit-form">
@@ -111,7 +111,7 @@ const UserInfo = ({ userId, currentUserId }) => {
                             onChange={handleChange}
                         />
                     </label>
-                    <div className="action-buttons">
+                    <div className="action-buttons2">
                         <button onClick={handleSave} className="save-button">Save</button>
                         <button onClick={() => setIsEditing(false)} className="cancel-button">Cancel</button>
                     </div>
@@ -121,7 +121,7 @@ const UserInfo = ({ userId, currentUserId }) => {
                     <p className="name"><strong>Name:</strong> {name}</p>
                     <p className="email"><strong>Email:</strong> {email}</p>
                     <p className="bio"><strong>Bio:</strong> {bio}</p>
-                    <div className="action-buttons">
+                    <div className="action-buttons2">
                         {userId === currentUserId ? (
                             <>
                                 <button onClick={() => setIsEditing(true)} className="edit-button">Edit Profile</button>
