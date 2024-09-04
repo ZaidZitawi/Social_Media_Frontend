@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import SuccessDialog from './SuccessDialog'; 
+import SuccessDialog from './SuccessDialog';
 import defaultImage from '../../images/image.png'; // Import the default image
 
 function Copyright(props) {
@@ -61,7 +61,7 @@ export default function SignUp() {
         setOpenSuccessDialog(true); // Show success dialog on successful registration
       } else {
         const errorResponse = await response.text();
-        alert(`Registration failed: ${errorResponse}`);
+        alert('Registration failed: ${errorResponse}');
       }
     } catch (error) {
       alert('Registration failed: An unexpected error occurred.');
@@ -129,6 +129,13 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
+            <Grid container justifyContent="center">
+              <Grid item>
+                <Link href="/SignIn" variant="body2">
+                  {"Have an account? SignIn"}
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />

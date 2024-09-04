@@ -1,11 +1,11 @@
 /* Basic styles for sidebar */
 .sidebar {
-  width: 250px;
+  width: 220px;
   min-width: 60px;
   background-color: #f2f5f7;
   position: fixed;
   left: 0;
-  top: 50%; /* Center vertically */
+  top: 55%; /* Center vertically */
   transform: translateY(-50%); /* Adjust the position to truly center */
   padding: 20px 10px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
