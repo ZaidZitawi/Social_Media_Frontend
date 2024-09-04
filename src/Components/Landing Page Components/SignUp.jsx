@@ -42,7 +42,7 @@ export default function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     // Use FormData directly with the input names to avoid any confusion or duplication
     const data = new FormData(event.target); // 'event.target' automatically gets the form element and its fields
 
@@ -129,6 +129,13 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
+            <Grid container justifyContent="center">
+              <Grid item>
+                <Link href="/SignIn" variant="body2">
+                  {"Have an account? SignIn"}
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />

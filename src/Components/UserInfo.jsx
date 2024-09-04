@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Styles/Profile.css';
 
-const UserInfo = ({ userId }) => {
+const UserInfo = ({ userId, currentUserId }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [bio, setBio] = useState('');
     const [name, setName] = useState('');
@@ -15,10 +15,8 @@ const UserInfo = ({ userId }) => {
             return;
         }
 
-        // Fetch the user's profile and user data when the component mounts
         const fetchProfileData = async () => {
             try {
-                // Fetch profile data to get bio
                 const profileResponse = await axios.get(`http://localhost:8080/v0/profile/${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -26,7 +24,6 @@ const UserInfo = ({ userId }) => {
                 });
                 setBio(profileResponse.data.bio || '');
 
-                // Fetch user data to get name and email
                 const userResponse = await axios.get(`http://localhost:8080/v0/user/${userId}/name`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -53,7 +50,6 @@ const UserInfo = ({ userId }) => {
         const { name, value } = e.target;
         if (name === 'bio') setBio(value);
         else if (name === 'name') setName(value);
-        // No need to handle email changes as it should not be editable
     };
 
     const handleSave = async () => {
@@ -63,7 +59,6 @@ const UserInfo = ({ userId }) => {
         }
 
         try {
-            // Update the profile bio
             await axios.put(`http://localhost:8080/v0/profile/updateInfo/${userId}`, 
                 { bio },
                 {
@@ -74,7 +69,6 @@ const UserInfo = ({ userId }) => {
                 }
             );
 
-            // Update the user name
             await axios.put(`http://localhost:8080/v0/user/${userId}/update`, 
                 { name },
                 {
@@ -107,7 +101,7 @@ const UserInfo = ({ userId }) => {
                     </label>
                     <label>
                         <strong>Email:</strong>
-                        <p>{email}</p> {/* Display email without editing */}
+                        <p>{email}</p>
                     </label>
                     <label>
                         <strong>Bio:</strong>
@@ -124,12 +118,18 @@ const UserInfo = ({ userId }) => {
                 </div>
             ) : (
                 <div>
-                    <p className="name"><strong>Name:</strong> {name}</p> {/* Apply the name class */}
+                    <p className="name"><strong>Name:</strong> {name}</p>
                     <p className="email"><strong>Email:</strong> {email}</p>
                     <p className="bio"><strong>Bio:</strong> {bio}</p>
                     <div className="action-buttons">
-                        <button className="add-friend-button">Add Friend</button>
-                        <button onClick={() => setIsEditing(true)} className="edit-button">Edit Profile</button>
+                        {userId === currentUserId ? (
+                            <>
+                                <button onClick={() => setIsEditing(true)} className="edit-button">Edit Profile</button>
+                                {/* Optionally, add other buttons related to your profile */}
+                            </>
+                        ) : (
+                            <button className="add-friend-button">Add Friend</button>
+                        )}
                     </div>
                 </div>
             )}

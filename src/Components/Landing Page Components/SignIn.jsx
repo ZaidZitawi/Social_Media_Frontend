@@ -103,6 +103,13 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            <Grid container justifyContent="center">
+              <Grid item>
+                <Link href="/SignUp" variant="body2">
+                  {"Don't have an account? SignUp"}
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

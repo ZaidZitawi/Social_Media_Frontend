@@ -82,7 +82,7 @@ const ProfileHeader = ({ userId }) => {
     };
 
     return (
-        <div className="profile-header">
+        <div className="profile-headerrr">
             <div className="cover-photo-container">
                 {coverPhotoUrl ? (
                     <img src={coverPhotoUrl} alt="Cover" />

@@ -45,13 +45,14 @@ header {
   padding: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 250px;
+  max-width: 220px;
   position: fixed; /* Fixed position like the sidebar */
-  top: 100px; /* Aligns below the AppBar */
+  top: 140px; /* Aligns below the AppBar */
   right: 0px; /* Adjust position relative to the right edge */
   height: 60vh;
   overflow: hidden; /* Disable scrolling */
   margin-right: 25px;
+  
 }
 
 .friend-suggestions-header {
