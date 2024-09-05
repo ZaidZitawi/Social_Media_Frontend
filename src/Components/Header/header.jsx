@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Logo from "../../images/logoo.png";
 import './header.css';
+import AccountPanel from "../Header/AccountPanel.jsx"
 
 function Header() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -139,6 +140,7 @@ function Header() {
               </div>
             )}
           </Box>
+          <AccountPanel />
         </Toolbar>
       </Container>
     </AppBar>

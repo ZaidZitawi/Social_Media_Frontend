@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { AppBar, Toolbar, Typography, Box, Button, IconButton } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
 import { styled } from '@mui/system';
+import { Link } from 'react-router-dom'; // Import Link
 import Logo from '../../images/logoo.png';
 
 // Styled components for custom hover effects
@@ -43,9 +44,8 @@ const Header = () => (
 
       {/* Navigation Buttons */}
       <Box>
-        <CustomButton>About</CustomButton>
-        <CustomButton>Contact</CustomButton>
-        <CustomButton>Login</CustomButton>
+        <CustomButton component={Link} to="/about">About</CustomButton>
+        <CustomButton component={Link} to="/signIn">Login</CustomButton>
       </Box>
     </Toolbar>
   </AppBar>

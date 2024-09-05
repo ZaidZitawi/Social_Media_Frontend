@@ -12,7 +12,7 @@ const MainArea = () => {
   const fetchPosts = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8080/v0/post/getAllPosts', {
+      const response = await axios.get('http://localhost:8080/v0/post/postsById', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

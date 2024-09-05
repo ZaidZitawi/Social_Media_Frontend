@@ -7,6 +7,7 @@ import { MenuItem as BaseMenuItem, menuItemClasses } from '@mui/base/MenuItem';
 import { styled } from '@mui/system';
 import { CssTransition } from '@mui/base/Transitions';
 import { PopupContext } from '@mui/base/Unstable_Popup';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { findUserByEmail } from '../../api/userApi.js';
 import { getProfileByUserId } from '../../api/profileApi.js';
 
@@ -46,6 +47,7 @@ const AvatarButton = styled(BaseMenuButton)(
 export default function MenuIntroduction() {
   const [profileImage, setProfileImage] = React.useState(null);
   const [error, setError] = React.useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   React.useEffect(() => {
     const fetchProfileImage = async () => {
@@ -102,11 +104,9 @@ export default function MenuIntroduction() {
     console.log('Profile image updated:', profileImage);
   }, [profileImage]);
 
-  const createHandleMenuClick = (menuItem) => {
-    return (event) => {
-      event.preventDefault();
-      console.log(`Clicked on ${menuItem}`);
-    };
+  const handleMenuItemClick = (path) => (event) => {
+    event.preventDefault();
+    navigate(path); // Navigate to the specified path
   };
 
   return (
@@ -119,11 +119,9 @@ export default function MenuIntroduction() {
         )}
       </AvatarButton>
       <Menu slots={{ listbox: AnimatedListbox }}>
-        <MenuItem onClick={createHandleMenuClick('Profile')}>Profile</MenuItem>
-        <MenuItem onClick={createHandleMenuClick('settings')}>
-          settings
-        </MenuItem>
-        <MenuItem onClick={createHandleMenuClick('Log out')}>Log out</MenuItem>
+        <MenuItem onClick={handleMenuItemClick('/profile')}>Profile</MenuItem>
+        <MenuItem onClick={handleMenuItemClick('/settings')}>Settings</MenuItem>
+        <MenuItem onClick={handleMenuItemClick('/logout')}>Log out</MenuItem>
       </Menu>
     </Dropdown>
   );
