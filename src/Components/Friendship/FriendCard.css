@@ -113,3 +113,42 @@
     grid-template-columns: 1fr; /* Stack all sections vertically on smaller screens */
   }
 }
+/* Friend Suggestions Dialogue Styles */
+.friends-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: fit-content;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay to shadow the background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000; /* Ensure it's above the sidebar */
+}
+
+.friends-dialog-content {
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.close-dialog-btn {
+  background: none;
+  border: none;
+  color: #e63946;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.friends-dialog-list {
+  max-height: 70vh;
+  overflow-y: auto;
+}

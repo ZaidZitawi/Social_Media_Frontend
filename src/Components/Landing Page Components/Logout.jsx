@@ -8,6 +8,9 @@ const Logout = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    localStorage.removeItem('profileImage');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
     navigate('/signin'); // Redirect to the signin page
   };
 

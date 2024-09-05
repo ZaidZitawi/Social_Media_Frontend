@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { FaUserPlus } from "react-icons/fa";
 import axios from "axios";
 import './FriendCard.css';
 import FriendCard from "./FriendCard"; 
+import defaultImage from '../../images/image.png';
 
 const FriendSuggestions = () => {
   const [users, setUsers] = useState([]);
   const [following, setFollowing] = useState({});
+  const [showAll, setShowAll] = useState(false);
 
   // Fetch user data from the API
   useEffect(() => {
@@ -19,6 +19,7 @@ const FriendSuggestions = () => {
             'Authorization': `Bearer ${token}`,
           },
         });
+        console.log("Fetched friend suggestions:", response.data);
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching friend suggestions:", error);
@@ -29,43 +30,73 @@ const FriendSuggestions = () => {
   }, []);
 
   const handleFollow = (userId) => {
-    console.log("Follow user with ID:", userId);
     setFollowing(prev => ({ ...prev, [userId]: true }));
   };
 
   const handleUnfollow = (userId) => {
-    console.log("Unfollow user with ID:", userId);
     setFollowing(prev => ({ ...prev, [userId]: false }));
   };
 
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
+  const handleCloseDialog = () => {
+    setShowAll(false);
+  };
+
   return (
-    <div className="friend-suggestions-container" role="complementary" aria-label="Friend Suggestions">
+    <div className="friend-suggestions-container">
       <div className="friend-suggestions-header">
         <h2 className="friend-suggestions-title">Friend Suggestions</h2>
-        <Link
-          to="/friends/suggestions"
-          className="friend-suggestions-link"
-          aria-label="View more friend suggestions"
-        >
-          View More
-        </Link>
+        {users.length > 4 && (
+          <button onClick={toggleShowAll} className="friend-suggestions-link">
+            {showAll ? 'Show Less' : 'View More'}
+          </button>
+        )}
       </div>
       {users.length === 0 ? (
         <p>No suggestions available.</p>
       ) : (
-        users.map((user) => (
+        users.slice(0, 4).map((user) => (
           <FriendCard
             key={user.userId}
             user={{
               id: user.userId,
               name: user.name,
-              profileImage: user.profile ? `/uploads/${user.profile.profilePictureUrl}` : "/path/to/default-image.jpg"
+              profileImage: user.profile ? `/uploads/${user.profile.profilePictureUrl}` : defaultImage
             }}
             onFollow={handleFollow}
             onUnfollow={handleUnfollow}
             isFollowing={following[user.userId]}
           />
         ))
+      )}
+
+      {/* Overlay and Dialogue */}
+      {showAll && (
+        <div className="friends-dialog">
+          <div className="friends-dialog-content">
+            <button className="close-dialog-btn" onClick={handleCloseDialog}>
+              Close
+            </button>
+            <div className="friends-dialog-list">
+              {users.map((user) => (
+                <FriendCard
+                  key={user.userId}
+                  user={{
+                    id: user.userId,
+                    name: user.name,
+                    profileImage: user.profile ? `/uploads/${user.profile.profilePictureUrl}` : defaultImage
+                  }}
+                  onFollow={handleFollow}
+                  onUnfollow={handleUnfollow}
+                  isFollowing={following[user.userId]}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

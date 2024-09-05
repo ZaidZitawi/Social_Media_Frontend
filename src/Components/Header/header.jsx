@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Logo from "../../images/logoo.png";
 import './header.css';
+import AccountPanel from '../Header/AccountPanel.jsx';
 
 function Header() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -128,7 +129,7 @@ function Header() {
               <ul className="suggestions-list">
                 {suggestions.map((user) => (
                   <li key={user.userId} onClick={() => handleSuggestionClick(user.userId)}>
-                    {user.name} {/* Adjust based on UserDto structure */}
+                    {user.name}
                   </li>
                 ))}
               </ul>
@@ -138,6 +139,7 @@ function Header() {
                 User not found
               </div>
             )}
+            <AccountPanel />
           </Box>
         </Toolbar>
       </Container>

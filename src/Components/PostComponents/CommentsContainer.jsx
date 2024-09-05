@@ -98,7 +98,7 @@ const CommentsContainer = ({ comments, postId }) => {
         </button>
       </div>
 
-      {/* Full comments dialog */}
+      
       {showAllComments && (
         <div className="comments-dialog">
           <div className="comments-dialog-content">

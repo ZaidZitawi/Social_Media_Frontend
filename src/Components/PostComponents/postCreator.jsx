@@ -11,14 +11,14 @@ const PostCreator = ({ onPostCreated }) => {
   const [name, setName] = useState('');
 
   useEffect(() => {
+    
+    
     const storedProfileImage = localStorage.getItem('profileImage');
     const storedName = localStorage.getItem('name');
-    if (storedProfileImage) {
-      setProfileImage(storedProfileImage);
-    }
-    if (storedName) {
-      setName(storedName);
-    }
+          
+    setProfileImage(storedProfileImage);
+    setName(storedName);
+
   }, []);
 
   const handlePostSubmit = async (e) => {

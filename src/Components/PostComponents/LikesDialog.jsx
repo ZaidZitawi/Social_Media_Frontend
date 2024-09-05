@@ -1,5 +1,6 @@
 import React from 'react';
 import './likesDialog.css';
+import defaultImage from '../../images/image.png';
 
 const LikesDialog = ({ users, onClose }) => {
   return (
@@ -13,7 +14,7 @@ const LikesDialog = ({ users, onClose }) => {
           {users.map(user => {
             const profilePictureUrl = user.userEntity.profile?.profilePictureUrl || '';
             const userName = user.userEntity.name + ' gave you a Big LIKE Bro👍' || 'Unknown User';
-            const userImage = profilePictureUrl ? `/uploads/${profilePictureUrl}` : '/path/to/default/image.png';
+            const userImage = profilePictureUrl ? `/uploads/${profilePictureUrl}` : defaultImage;
 
             return (
               <div key={user.userEntity.userId} className="like-card">

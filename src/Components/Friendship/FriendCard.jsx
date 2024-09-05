@@ -11,7 +11,7 @@ const FriendCard = ({ user, onFollow, onUnfollow, isFollowing }) => {
         className="friend-card-image"
         loading="lazy"
       />
-      <span className="friend-card-username">{user.username}</span>
+      <span className="friend-card-username">{user.name}</span>
       <div className="friend-card-actions">
         {isFollowing ? (
           <button

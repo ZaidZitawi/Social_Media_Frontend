@@ -4,6 +4,7 @@ import MediaDisplay from './MediaDisplay';
 import ActionButtons from './ActionButtons';
 import CommentsContainer from './CommentsContainer';
 import './post.css';
+import defaultImage from '../../images/image.png';
 
 const Post = ({ post }) => {
   const [isCommentsVisible, setIsCommentsVisible] = useState(false);
