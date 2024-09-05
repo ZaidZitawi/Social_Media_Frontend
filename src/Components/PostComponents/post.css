@@ -275,4 +275,18 @@
     background-color: #c7d2fe; /* Even darker background when clicked */
   }
   
-  
+  /* delete.css */
+
+.delete-post-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  padding-top: 10px;
+}
+
+.trash-icon {
+  color: red; /* Change the color to red */
+  font-size: 24px; /* Adjust the size as needed */
+}

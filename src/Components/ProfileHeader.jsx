@@ -21,7 +21,7 @@ const ProfileHeader = ({ userId }) => {
                     }
                 });
                 const { profilePictureUrl, coverPictureUrl } = response.data;
-                setProfilePictureUrl(profilePictureUrl ? path + profilePictureUrl : "/default-profile.png");
+                setProfilePictureUrl(profilePictureUrl ? path + profilePictureUrl : "");
                 setCoverPhotoUrl(coverPictureUrl ? path + coverPictureUrl : "");
             } catch (error) {
                 console.error('Error fetching profile data:', error);
