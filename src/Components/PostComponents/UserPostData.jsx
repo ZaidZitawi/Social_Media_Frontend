@@ -1,5 +1,6 @@
 import React from 'react';
 import './post.css';
+import defaultImage from '../../images/image.png';
 
 // Helper function to format time
 const timeAgo = (timestamp) => {
@@ -27,7 +28,7 @@ const timeAgo = (timestamp) => {
 
 const UserPostData = ({ profilePic, username, date }) => {
   // Directly construct the URL for local images
-  const imageUrl = `/uploads/${profilePic}`;
+  const imageUrl = profilePic ? `/uploads/${profilePic}` : defaultImage;
 
   // Format the date
   const formattedDate = timeAgo(date);

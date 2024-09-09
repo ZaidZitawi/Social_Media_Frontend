@@ -1,0 +1,163 @@
+/* Centralized Dialogue Styles */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 110vh;
+  background: rgba(0, 0, 0, 0.5); /* Overlay to shadow the background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensures it's above most other elements */
+}
+
+.dialog-content {
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-height: 80vh;
+  overflow-y: auto;
+  
+}
+
+.close-dialog-btn {
+  background: none;
+  border: none;
+  color: #e63946;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 5px;
+  text-align: right;
+}
+
+/* Tab Styles */
+.MuiTabs-root {
+  border-bottom: 1px solid #ddd;
+}
+
+.MuiTab-root {
+  text-transform: none; /* Keeps the tab labels normal without uppercasing */
+  font-size: 1rem;
+}
+
+/* Container for scrollable lists */
+.dialog-list {
+  max-height: 65vh;/* Adjust height to remove double scroll */
+  overflow-y: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Friend Card Styles */
+.friend-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: transform 0.2s;
+}
+
+.friend-card:hover {
+  transform: scale(1.05);
+}
+
+.friend-profile-pic {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.friend-name {
+  font-weight: bold;
+}
+
+/* Specific Styles for Like Cards */
+.like-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.like-profile-pic {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.like-name {
+  margin: 0;
+}
+
+/* Dialog comment styles */
+.dialog-comment {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.dialog-user-image {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.dialog-comment-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-user-name {
+  font-weight: bold;
+}
+
+.dialog-comment-time {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.dialog-comment-text {
+  margin-top: 5px;
+}
+
+
+
+/* Customize Css for the friend request dialouge in the left sidebar*/
+/* Accept and Reject Button Styles */
+.accept-btn {
+  background-color: #4caf50; /* Green */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: auto;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.accept-btn:hover {
+  background-color: #45a049;
+}
+
+.reject-btn {
+  background-color: #f44336; /* Red */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.reject-btn:hover {
+  background-color: #d32f2f;
+}

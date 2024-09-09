@@ -10,7 +10,7 @@ import Header from './header';
 const About = () => {
     return (
         <div className="about-page">
-             <div>
+             <div className='sidebarr'>
                 <Sidebar/>
              </div>
             <Header/>

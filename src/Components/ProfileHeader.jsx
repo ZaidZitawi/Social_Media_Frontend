@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import EditIcon from '@mui/icons-material/Edit';
+import '../Styles/Profile.css';
 
 const ProfileHeader = ({ userId }) => {
     const [profilePictureUrl, setProfilePictureUrl] = useState("/default-profile.png");

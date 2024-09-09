@@ -129,7 +129,7 @@ function Header() {
               <ul className="suggestions-list">
                 {suggestions.map((user) => (
                   <li key={user.userId} onClick={() => handleSuggestionClick(user.userId)}>
-                    {user.name} {/* Adjust based on UserDto structure */}
+                    {user.name}
                   </li>
                 ))}
               </ul>
@@ -139,8 +139,8 @@ function Header() {
                 User not found
               </div>
             )}
+            <AccountPanel />
           </Box>
-          <AccountPanel />
         </Toolbar>
       </Container>
     </AppBar>

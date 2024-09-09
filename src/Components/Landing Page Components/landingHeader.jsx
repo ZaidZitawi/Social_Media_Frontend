@@ -38,7 +38,7 @@ const Header = () => (
             color: '#FFFFFF',
           }}
         >
-          MyPlatform
+          TechPees
         </Typography>
       </Box>
 

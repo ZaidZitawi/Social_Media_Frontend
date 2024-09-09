@@ -3,6 +3,7 @@
     text-align: center;
     padding: 60px;
     padding-left: 190px;
+    display: grid;
 }
 
 .about-title {
@@ -19,6 +20,20 @@
     gap: 100px; /* Space between grid items */
     max-width: 800px;
     margin: 0 auto; /* Center the grid */
+}
+.sidebarr{
+    padding: 20px;
+    background-color: #FFC0CB;
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow-x: hidden;
+    transition: 0.5s;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
 }
 
 .about-item {
@@ -43,3 +58,4 @@
     color: #161515; /* Slightly darker color for the text */
     line-height: 1.6;
 }
+
