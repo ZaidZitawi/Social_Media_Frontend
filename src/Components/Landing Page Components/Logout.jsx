@@ -11,7 +11,7 @@ const Logout = () => {
     localStorage.removeItem('profileImage');
     localStorage.removeItem('name');
     localStorage.removeItem('email');
-    navigate('/signin'); // Redirect to the signin page
+    navigate('/LandingPage'); // Redirect to the signin page
   };
 
   return (

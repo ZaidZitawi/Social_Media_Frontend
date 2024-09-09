@@ -26,11 +26,12 @@ root.render(
         <Route path="/post" element={<PostForm />} />
         <Route path="/k" element={<Post />} />
         <Route path="/p" element={<UserPostData />} />
-        <Route path="/land" element={<LandingPage />} />
+        <Route path="/LandingPage" element={<LandingPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/:userId?" element={<Profile />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/about" element={<About />} />
+        
       </Routes>
     </Router>
 );

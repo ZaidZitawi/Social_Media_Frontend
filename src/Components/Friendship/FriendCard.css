@@ -4,11 +4,10 @@
   padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 270px;
+  max-width: 230px;
   position: fixed; /* Fixed position like the sidebar */
   top: 100px; /* Aligns below the AppBar */
-  right: 10px; /* Adjust position relative to the right edge */
-  height: 60vh;
+  height: 55vh;
   border: 1px solid #1E8EAB;
   transition: box-shadow 0.3s ease;
   overflow:hidden;
@@ -31,50 +30,46 @@
   font-size: 1.1rem;
 }
 
-.friend-suggestions-link {
-  font-size: 0.9rem;
-  color: #1E8EAB;
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.friend-suggestions-link:hover {
-  color: #004696;
-}
 
 /* Friend Card Styles */
 .friend-card {
   display: flex;
   align-items: center;
-  background-color: #fff;
+  background-color: #F4F9FD; /* Light blue background to complement the theme */
   border-radius: 8px;
   padding: 10px;
-  box-shadow: 0 2px 4px rgba(103, 134, 205, 0.1);
+  box-shadow: 0 2px 6px rgba(30, 142, 171, 0.1); /* Updated shadow color for better coherence */
   margin-bottom: 15px;
   transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid #1E8EAB;
-  overflow: hidden; /* Ensure no overflow from the card */
+  border: 1px solid #D6E4EB; /* Soft border to create a defined look */
+  overflow: hidden;
+  max-width: 90%;
 }
 
 .friend-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 70, 150, 0.15); /* Enhanced shadow effect on hover */
 }
 
 .friend-card-image {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  margin-right: 10px;
-  border: 2px solid #004696;
+  margin-right: 15px;
+  border: 2px solid #1E8EAB; /* Accent border color to match the theme */
+  flex-shrink: 0; /* Prevent the image from shrinking */
 }
 
 .friend-card-username {
   flex: 1;
-  color: #004696;
+  color: #1E8EAB; /* Updated to light blue to ensure better readability and theme consistency */
   font-weight: 600;
   margin-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-word;
+  max-width: 150px; /* Adjust as needed to fit within the card */
 }
 
 .friend-card-actions {
@@ -83,8 +78,8 @@
 }
 
 .friend-card-button {
-  background-color: #1E8EAB;
-  color: #fff;
+  background-color: #004696; /* Dark blue for primary action buttons */
+  color: #FFFFFF;
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
@@ -96,15 +91,15 @@
 }
 
 .friend-card-button.follow {
-  background-color: #1E8EAB;
+  background-color: #1E8EAB; /* Light blue for follow actions */
 }
 
 .friend-card-button.unfollow {
-  background-color: #FF6F61;
+  background-color: #FF6F61; /* Contrasting color for unfollow actions */
 }
 
 .friend-card-button:hover {
-  background-color: #004696;
+  background-color: #00376B; /* Darker hover effect for better visual feedback */
   transform: translateY(-2px);
 }
 
@@ -112,13 +107,22 @@
   .main-content {
     grid-template-columns: 1fr; /* Stack all sections vertically on smaller screens */
   }
+  .friend-card {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    align-items: flex-start;
+  }
+  .friend-card-username {
+    max-width: 100%; /* Allow full width on smaller screens */
+    white-space: normal; /* Allow text to wrap */
+  }
 }
+
 /* Friend Suggestions Dialogue Styles */
 .friends-dialog {
   position: fixed;
   top: 0;
   left: 0;
-  width: fit-content;
+  width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5); /* Overlay to shadow the background */
   display: flex;
@@ -136,6 +140,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   max-height: 80vh;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .close-dialog-btn {
@@ -146,9 +152,49 @@
   cursor: pointer;
   margin-bottom: 10px;
   text-align: right;
+  align-self: flex-end;
 }
 
 .friends-dialog-list {
   max-height: 70vh;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+
+/* Link/Button Styles */
+.friend-suggestions-link {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(135deg, #1e8eab, #004696);
+  border: 1px solid #004696;
+  border-radius: 25px;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 70, 150, 0.2);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.friend-suggestions-link:hover {
+  background: linear-gradient(135deg, #004696, #1e8eab);
+  color: #ffffff;
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 70, 150, 0.4);
+}
+
+.friend-suggestions-link:active {
+  transform: scale(0.98) translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 70, 150, 0.1);
+}
+
+.friend-suggestions-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(30, 142, 171, 0.3);
 }

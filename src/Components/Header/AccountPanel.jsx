@@ -7,8 +7,7 @@ import { MenuItem as BaseMenuItem, menuItemClasses } from '@mui/base/MenuItem';
 import { styled } from '@mui/system';
 import { CssTransition } from '@mui/base/Transitions';
 import { PopupContext } from '@mui/base/Unstable_Popup';
-import { findUserByEmail } from '../../api/userApi.js';
-import { getProfileByUserId } from '../../api/profileApi.js';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const AvatarButton = styled(BaseMenuButton)(
   ({ theme }) => `
@@ -46,67 +45,30 @@ const AvatarButton = styled(BaseMenuButton)(
 export default function MenuIntroduction() {
   const [profileImage, setProfileImage] = React.useState(null);
   const [error, setError] = React.useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   React.useEffect(() => {
-    const fetchProfileImage = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) throw new Error('No token found');
+    const storedProfileImage = localStorage.getItem('profileImage');
+    const storedName = localStorage.getItem('name');
 
-        // Decode email and user ID from token
-        let email = localStorage.getItem('email');
-        let userId = localStorage.getItem('userId');
-        let storedProfileImage = localStorage.getItem('profileImage');
-        let name = localStorage.getItem('name');
+    if (storedProfileImage) {
+      setProfileImage(`/uploads/${storedProfileImage}`);
+    } else {
+      setProfileImage('/uploads/default-profile.png');
+    }
 
-        console.log('Stored Email:', email);
-        console.log('Stored UserId:', userId);
-        console.log('Stored Profile Image:', storedProfileImage);
-        console.log('Stored Name:', name);
+    console.log('Stored Profile Image:', storedProfileImage);
+    console.log('Stored Name:', storedName);
 
-        if (!email || !userId || !storedProfileImage || !name) {
-          email = decodeTokenEmail(token);
-          if (!email) throw new Error('Invalid token, email not found');
-
-          const userResponse = await findUserByEmail(email, token);
-          userId = userResponse.data.userId;
-          name = userResponse.data.name;
-          console.log('User response:', userResponse);
-
-          const profileResponse = await getProfileByUserId(userId);
-          console.log('Profile response:', profileResponse);
-          const imageName = profileResponse.data.profilePictureUrl;
-          const imageUrl = `/uploads/${imageName}`;
-          
-          // Set the profile image URL
-          setProfileImage(imageUrl);
-
-          // Store email, userId, and profileImage in local storage
-          localStorage.setItem('email', email);
-          localStorage.setItem('userId', userId);
-          localStorage.setItem('profileImage', imageUrl);
-          localStorage.setItem('name', name);
-        } else {
-          // If profileImage is available in local storage, use it
-          setProfileImage(storedProfileImage);
-        }
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
-    fetchProfileImage();
   }, []);
 
   React.useEffect(() => {
     console.log('Profile image updated:', profileImage);
   }, [profileImage]);
 
-  const createHandleMenuClick = (menuItem) => {
-    return (event) => {
-      event.preventDefault();
-      console.log(`Clicked on ${menuItem}`);
-    };
+  const handleMenuItemClick = (path) => (event) => {
+    event.preventDefault();
+    navigate(path); // Navigate to the specified path
   };
 
   return (
@@ -119,45 +81,13 @@ export default function MenuIntroduction() {
         )}
       </AvatarButton>
       <Menu slots={{ listbox: AnimatedListbox }}>
-        <MenuItem onClick={createHandleMenuClick('Profile')}>Profile</MenuItem>
-        <MenuItem onClick={createHandleMenuClick('settings')}>
-          settings
-        </MenuItem>
-        <MenuItem onClick={createHandleMenuClick('Log out')}>Log out</MenuItem>
+        <MenuItem onClick={handleMenuItemClick('/profile')}>Profile</MenuItem>
+        <MenuItem onClick={handleMenuItemClick('/settings')}>Settings</MenuItem>
+        <MenuItem onClick={handleMenuItemClick('/logout')}>Log out</MenuItem>
       </Menu>
     </Dropdown>
   );
 }
-
-// Extract email from token
-const decodeTokenEmail = (token) => {
-  if (!token) {
-    console.error('No token provided');
-    return null;
-  }
-
-  try {
-    // Split the token into its parts
-    const [header, payload] = token.split('.');
-    console.log('Header:', header);
-    console.log('Payload:', payload);
-
-    // Decode the base64 URL encoded payload
-    const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
-    const decodedPayload = atob(base64);
-    console.log('Decoded Payload:', decodedPayload);
-
-    // Parse JSON
-    const parsedPayload = JSON.parse(decodedPayload);
-    console.log('Parsed Payload:', parsedPayload);
-
-    // Extract email from the 'sub' field
-    return parsedPayload.sub || null;
-  } catch (error) {
-    console.error('Error decoding token:', error);
-    return null;
-  }
-};
 
 const Listbox = styled('ul')(
   ({ theme }) => `

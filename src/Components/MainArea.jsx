@@ -5,14 +5,21 @@ import PostsList from './PostsList.jsx';
 import LinearProgress from '@mui/material/LinearProgress';
 import Box from '@mui/material/Box';
 
-const MainArea = () => {
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
 
+
+const MainArea = ({ view }) => {
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Fetch posts based on the current view
   const fetchPosts = async () => {
+    setIsLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8080/v0/post/getAllPosts', {
+      const endpoint = view === 'timeline' 
+        ? 'http://localhost:8080/v0/post/friendsPosts' 
+        : 'http://localhost:8080/v0/post/getAllPosts';
+      const response = await axios.get(endpoint, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -21,20 +28,19 @@ const MainArea = () => {
       setPosts(response.data.reverse()); // Reverse the order to show newest posts first
     } catch (error) {
       console.error('Error fetching posts:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Fetch posts when the component mounts or after a post is created
+  // Fetch posts when the component mounts or when the view changes
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [view]);
 
   // Function to handle post creation
   const handlePostCreated = () => {
-    setIsLoading(true); // Start loading
-    fetchPosts().finally(() => {
-      setIsLoading(false); // Stop loading
-    });
+    fetchPosts();
   };
 
   return (

@@ -16,7 +16,7 @@ const PostCreator = ({ onPostCreated }) => {
     const storedProfileImage = localStorage.getItem('profileImage');
     const storedName = localStorage.getItem('name');
           
-    setProfileImage(storedProfileImage);
+    setProfileImage(`/uploads/${storedProfileImage}`);
     setName(storedName);
 
   }, []);

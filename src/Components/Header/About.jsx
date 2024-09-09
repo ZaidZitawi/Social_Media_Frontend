@@ -10,7 +10,9 @@ import Header from './header';
 const About = () => {
     return (
         <div className="about-page">
-             <Sidebar/>
+             <div className='sidebarr'>
+                <Sidebar/>
+             </div>
             <Header/>
             <h1 className="about-title">About Us</h1>
             <div className="about-grid">
