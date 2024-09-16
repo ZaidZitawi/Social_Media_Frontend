@@ -47,7 +47,7 @@ This is the front-end of a social media platform that allows users to interact w
 
 1. Clone the frontend repository:
    ```bash
-   git clone https://github.com/your-username/social-media-platform-frontend.git
+   git clone https://github.com/ZaidZitawi/social-media-platform-frontend.git
 
 
 ## Quick insight
